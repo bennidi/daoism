@@ -3,12 +3,12 @@ package net.engio.common;
 import net.engio.common.base.SpringAwareCrudTest;
 import net.engio.common.domain.Queries;
 import net.engio.common.domain.VServerDao;
-import net.engio.common.persistence.dao.ITypedDao;
+import net.engio.daoism.dao.ITypedDao;
 import net.engio.common.domain.VServer;
-import net.engio.common.persistence.dao.jpa.UnitOfWork;
-import net.engio.common.persistence.dao.query.LockType;
-import net.engio.common.persistence.dao.query.Options;
-import net.engio.common.persistence.dao.query.Query;
+import net.engio.daoism.dao.jpa.UnitOfWork;
+import net.engio.daoism.dao.query.LockType;
+import net.engio.daoism.dao.query.Options;
+import net.engio.daoism.dao.query.Query;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

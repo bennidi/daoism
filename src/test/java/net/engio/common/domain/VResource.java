@@ -1,7 +1,7 @@
 package net.engio.common.domain;
 
 
-import net.engio.common.persistence.Entity;
+import net.engio.daoism.Entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;

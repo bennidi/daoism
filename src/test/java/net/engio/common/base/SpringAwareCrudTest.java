@@ -1,8 +1,8 @@
 package net.engio.common.base;
 
 
-import net.engio.common.persistence.Entity;
-import net.engio.common.test.CrudTest;
+import net.engio.daoism.Entity;
+import net.engio.daoism.test.CrudTest;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;

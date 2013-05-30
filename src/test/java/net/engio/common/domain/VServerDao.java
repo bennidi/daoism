@@ -1,7 +1,7 @@
 package net.engio.common.domain;
 
-import net.engio.common.persistence.dao.IDao;
-import net.engio.common.persistence.dao.TypedDao;
+import net.engio.daoism.dao.IDao;
+import net.engio.daoism.dao.TypedDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

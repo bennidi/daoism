@@ -1,6 +1,6 @@
 package net.engio.common.domain;
 
-import net.engio.common.persistence.dao.query.Query;
+import net.engio.daoism.dao.query.Query;
 
 /**
  * Created with IntelliJ IDEA.

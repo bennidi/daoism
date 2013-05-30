@@ -1,8 +1,8 @@
 package net.engio.common.domain;
 
-import net.engio.common.persistence.Entity;
-import net.engio.common.persistence.dao.IUnitOfWork;
-import net.engio.common.persistence.dao.jpa.JpaDao;
+import net.engio.daoism.Entity;
+import net.engio.daoism.dao.IUnitOfWork;
+import net.engio.daoism.dao.jpa.JpaDao;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;

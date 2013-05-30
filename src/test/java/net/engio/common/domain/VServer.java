@@ -1,8 +1,6 @@
 package net.engio.common.domain;
 
-import net.engio.common.persistence.dao.query.Query;
 import net.engio.common.persistence.spec.spex.DateAttribute;
-import org.hibernate.ejb.QueryHints;
 
 import javax.persistence.*;
 import java.util.Date;

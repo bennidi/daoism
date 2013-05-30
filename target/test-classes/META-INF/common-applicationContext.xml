@@ -38,6 +38,8 @@
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
 
+    <!-- the common persistence components  -->
+    <import resource="common-persistence.xml" />
 
     <!--import resource="hibernate-integration.xml" />-->
     <import resource="eclipselink-integration.xml" />
