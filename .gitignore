@@ -4,3 +4,13 @@
 *.jar
 *.war
 *.ear
+
+
+# IntelliJ #
+*.iml
+.idea
+.idea/*
+
+# generated ddl #
+*.jdbc
+
