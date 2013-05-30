@@ -1,15 +1,15 @@
 package net.engio.daoism.dao;
 
+import net.engio.common.spex.ISpecification;
+import net.engio.daoism.Entity;
+import net.engio.daoism.dao.query.ISelect;
+import net.engio.daoism.dao.query.Options.AccessPlan;
+import net.engio.daoism.dao.query.Query;
+import net.engio.daoism.dao.query.Query.TypedQuery;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-
-import net.engio.daoism.Entity;
-import net.engio.daoism.dao.query.Options.AccessPlan;
-import net.engio.daoism.dao.query.ISelect;
-import net.engio.daoism.dao.query.Query;
-import net.engio.daoism.dao.query.Query.TypedQuery;
-import net.engio.common.spex.ISpecification;
 
 
 /**
@@ -151,5 +151,10 @@ public abstract class TypedDao<K extends Serializable , E extends Entity<K>> imp
     @Override
     public boolean isManaged(E entity) {
         return getDao().isManaged(entity);
+    }
+
+    @Override
+    public void flush() {
+        getDao().flush();
     }
 }

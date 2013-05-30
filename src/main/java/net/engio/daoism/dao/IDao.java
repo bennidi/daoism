@@ -181,6 +181,7 @@ public interface IDao {
 	<E> List<E> runQuery(Class<E> resultType, Query source);
 
     <D extends Entity<? extends Serializable>> boolean isManaged(D domainObject);
-	
+
+    void flush();
 
 }

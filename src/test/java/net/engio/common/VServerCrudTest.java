@@ -49,6 +49,61 @@ public class VServerCrudTest extends SpringAwareCrudTest<String, VServer> {
     }
 
     @Test
+    public void testPeformance(){
+        float count = 10000;
+        float firstRun,secondRun, thirdRun;
+
+        final List<VServer> entities = new LinkedList<VServer>();
+        for(int i = 0; i < count; i++){
+            entities.add(createValidEntity());
+        }
+        long start = System.currentTimeMillis();
+        dao.persistAll(entities);
+        long end = System.currentTimeMillis();
+
+        firstRun = (count / (end - start)) * 1000f;
+
+
+        entities.clear();
+        for(int i = 0; i < count; i++){
+            entities.add(createValidEntity());
+        }
+        start = System.currentTimeMillis();
+        for(VServer entity : entities)
+            dao.persist(entity);
+        end = System.currentTimeMillis();
+
+        secondRun = (count / (end - start)) * 1000f;
+
+
+
+        entities.clear();
+        for(int i = 0; i < count; i++){
+            entities.add(createValidEntity());
+        }
+        start = System.currentTimeMillis();
+        dao.runTransactional(new UnitOfWork() {
+            @Override
+            public void execute() throws Exception {
+                int i=0;
+                for(VServer entity : entities){
+                    dao.persist(entity);
+                    if(i++ % 220 == 0)dao.flush();
+                }
+
+            }
+        });
+        end = System.currentTimeMillis();
+        thirdRun = (count / (end - start)) * 1000f;
+
+        System.out.println("Performance per entity for " + count + " entities with persistAll : " +  firstRun);
+        System.out.println("Performance per entity for " + count + " entities with persist : " +  secondRun );
+        System.out.println("Performance per entity for " + count + " entities with persist and flush : " +  thirdRun );
+
+    }
+
+
+    @Test
     public void ApiSampleShowCase() {
         VServer vServer1 = createValidEntity();
         VServer vServer2 = createValidEntity();

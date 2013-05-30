@@ -138,4 +138,6 @@ public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
     boolean isSameVersion(E one, E other);
 
     boolean isManaged(E entity);
+
+    void flush();
 }

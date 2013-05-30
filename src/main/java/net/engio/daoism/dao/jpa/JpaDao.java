@@ -1,10 +1,16 @@
 package net.engio.daoism.dao.jpa;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map.Entry;
+import net.engio.common.spex.ISpecification;
+import net.engio.daoism.Entity;
+import net.engio.daoism.dao.IDao;
+import net.engio.daoism.dao.IUnitOfWork;
+import net.engio.daoism.dao.query.ISelect;
+import net.engio.daoism.dao.query.LockType;
+import net.engio.daoism.dao.query.Options;
+import net.engio.daoism.dao.query.Options.AccessPlan;
+import net.engio.daoism.dao.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
@@ -13,18 +19,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Root;
-
-import net.engio.daoism.Entity;
-import net.engio.daoism.dao.IDao;
-import net.engio.daoism.dao.query.ISelect;
-import net.engio.daoism.dao.IUnitOfWork;
-import net.engio.daoism.dao.query.Options;
-import net.engio.daoism.dao.query.Options.AccessPlan;
-import net.engio.daoism.dao.query.LockType;
-import net.engio.daoism.dao.query.Query;
-import net.engio.common.spex.ISpecification;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map.Entry;
 
 
 /**
@@ -312,5 +311,10 @@ public abstract class JpaDao implements IDao{
     @Override
     public <D extends Entity<? extends Serializable>> boolean isManaged(D domainObject) {
         return entityManager().contains(domainObject);
+    }
+
+    @Override
+    public void flush() {
+        entityManager().flush();
     }
 }
