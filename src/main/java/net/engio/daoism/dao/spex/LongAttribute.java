@@ -1,7 +1,5 @@
 package net.engio.daoism.dao.spex;
 
-import java.util.Date;
-
 /**
  * Created with IntelliJ IDEA.
  * User: benjamin
@@ -9,10 +7,9 @@ import java.util.Date;
  * Time: 4:25 PM
  * To change this template use File | Settings | File Templates.
  */
-public class DateAttribute extends ComparableAttribute<DateAttribute, Date> {
+public class LongAttribute extends NumberAttribute<Long> {
 
-    public DateAttribute(String path) {
+    public LongAttribute(String path) {
         super(path);
     }
-
 }

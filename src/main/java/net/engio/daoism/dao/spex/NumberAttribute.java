@@ -7,13 +7,9 @@ package net.engio.daoism.dao.spex;
  * Time: 4:25 PM
  * To change this template use File | Settings | File Templates.
  */
-public class NumberAttribute extends OrderedAttribute<NumberAttribute> {
+public abstract class NumberAttribute<N extends Number & Comparable> extends ComparableAttribute<NumberAttribute, N> {
 
     public NumberAttribute(String path) {
         super(path);
-    }
-
-    public ISpecification GreaterThan(Number value){
-        return new ISpecification.SpecificationNode(new GreaterThanNode(this, value));
     }
 }

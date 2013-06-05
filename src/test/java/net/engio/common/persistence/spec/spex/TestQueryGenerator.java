@@ -61,7 +61,7 @@ public class TestQueryGenerator extends JUnitTest{
         result = em.createQuery(morePortsThanNics).getResultList();
         assertEquals(0, result.size());
 
-        CriteriaQuery moreThanThreePorts = queryGen.buildQuery(VServer.Ports.GreaterThan(3),  VServer.class, em.getCriteriaBuilder());
+        CriteriaQuery moreThanThreePorts = queryGen.buildQuery(VServer.Ports.GreaterThan(3L),  VServer.class, em.getCriteriaBuilder());
         result = em.createQuery(moreThanThreePorts).getResultList();
         assertEquals(2, result.size());
 
@@ -80,7 +80,7 @@ public class TestQueryGenerator extends JUnitTest{
 
         QueryGenerator queryGen = new QueryGenerator();
 
-        CriteriaQuery moreNicsThanPorts = queryGen.buildQuery(VServer.Nics.GreaterThan(VServer.Ports).Or(VServer.Ports.GreaterThan(8)),  VServer.class,  em.getCriteriaBuilder());
+        CriteriaQuery moreNicsThanPorts = queryGen.buildQuery(VServer.Nics.GreaterThan(VServer.Ports).Or(VServer.Ports.GreaterThan(8L)),  VServer.class,  em.getCriteriaBuilder());
         List result = em.createQuery(moreNicsThanPorts).getResultList();
         assertEquals(2, result.size());
     }
@@ -98,5 +98,12 @@ public class TestQueryGenerator extends JUnitTest{
 
         Long count = dao.count(VServer.Nics.GreaterThan(VServer.Ports));
         assertEquals(1L, count);
+
+    }
+
+    @Test
+    public void testTypeErasure(){
+
+        VServer.Generated.Equals(new Date());
     }
 }

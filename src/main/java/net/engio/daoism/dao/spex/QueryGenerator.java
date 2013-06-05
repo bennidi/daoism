@@ -2,7 +2,6 @@ package net.engio.daoism.dao.spex;
 
 import net.engio.common.xpress.ast.nodes.Node;
 import net.engio.common.xpress.ast.nodes.ValueNode;
-import net.engio.common.xpress.eval.Bindings;
 import net.engio.common.xpress.eval.EvalFunction;
 import net.engio.common.xpress.eval.EvaluationContext;
 import net.engio.common.xpress.eval.Interpreter;
@@ -31,16 +30,16 @@ public class QueryGenerator extends Interpreter.Impl<QueryGenerator>{
 
     public CriteriaQuery buildQuery(ISpecification spec, Class rootEntity, CriteriaBuilder builder ){
         CriteriaQuery query = builder.createQuery(rootEntity);
-        query.where(toJpaPredicate(spec, rootEntity, builder, query));
+        Root queryRoot = query.from(rootEntity);
+        if(spec != null)query.where(toJpaPredicate(spec, queryRoot, builder, query));
         return query;
     }
 
-    public Predicate toJpaPredicate(ISpecification spec, Class rootEntity, CriteriaBuilder builder, CriteriaQuery query){
-        Root queryRoot = query.from(rootEntity);
-        Predicate predicate = evaluate(spec, new EvaluationContext(this).push(new Bindings.Impl()
+    public Predicate toJpaPredicate(ISpecification spec, Root rootEntity, CriteriaBuilder builder, CriteriaQuery query){
+        Predicate predicate = evaluate(spec, new EvaluationContext(this)
                 .bind(builder).to("builder")
                 .bind(query).to("query")
-                .bind(queryRoot).to("root")));
+                .bind(rootEntity).to("root"));
        return predicate;
     }
 
@@ -49,8 +48,8 @@ public class QueryGenerator extends Interpreter.Impl<QueryGenerator>{
 
         @Override
         public Predicate evaluate(GreaterThan.GreaterThanNode node, EvaluationContext context) {
-            CriteriaBuilder cb = context.lookup("builder");
-            Root root = context.lookup("root");
+            CriteriaBuilder cb = context.get("builder");
+            Root root = context.get("root");
 
             // left should only point to a DateAttribute
             IAttribute left = ((ValueNode)node.getLeft()).getValue();
@@ -70,8 +69,8 @@ public class QueryGenerator extends Interpreter.Impl<QueryGenerator>{
 
         @Override
         public Predicate evaluate(LessThan.LessThanNode node, EvaluationContext context) {
-            CriteriaBuilder cb = context.lookup("builder");
-            Root root = context.lookup("root");
+            CriteriaBuilder cb = context.get("builder");
+            Root root = context.get("root");
 
             // left should only point to a DateAttribute
             IAttribute left = ((ValueNode)node.getLeft()).getValue();
@@ -92,7 +91,7 @@ public class QueryGenerator extends Interpreter.Impl<QueryGenerator>{
 
         @Override
         public Predicate evaluate(Or.OrNode node, EvaluationContext context) {
-            CriteriaBuilder cb = context.lookup("builder");
+            CriteriaBuilder cb = context.get("builder");
 
             Predicate[] conditions = new Predicate[node.getChildren().size()];
             int i = 0;
@@ -107,7 +106,7 @@ public class QueryGenerator extends Interpreter.Impl<QueryGenerator>{
 
         @Override
         public Predicate evaluate(And.AndNode node, EvaluationContext context) {
-            CriteriaBuilder cb = context.lookup("builder");
+            CriteriaBuilder cb = context.get("builder");
 
             Predicate[] conditions = new Predicate[node.getChildren().size()];
             int i = 0;

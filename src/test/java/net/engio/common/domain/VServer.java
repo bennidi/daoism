@@ -2,7 +2,8 @@ package net.engio.common.domain;
 
 
 import net.engio.daoism.dao.spex.DateAttribute;
-import net.engio.daoism.dao.spex.NumberAttribute;
+import net.engio.daoism.dao.spex.IntegerAttribute;
+import net.engio.daoism.dao.spex.LongAttribute;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -29,8 +30,8 @@ public class VServer extends VResource{
     private Long numberOfPorts = 0L;
 
     public static final DateAttribute Generated = new DateAttribute("generated");
-    public static final NumberAttribute Nics = new NumberAttribute("numberOfNics");
-    public static final NumberAttribute Ports = new NumberAttribute("numberOfPorts");
+    public static final IntegerAttribute Nics = new IntegerAttribute("numberOfNics");
+    public static final LongAttribute Ports = new LongAttribute("numberOfPorts");
 
     @Column(name = "v_host")
     private String host;

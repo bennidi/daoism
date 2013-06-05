@@ -48,7 +48,6 @@ public class VServerCrudTest extends SpringAwareCrudTest<String, VServer> {
         entities.add(createValidEntity());
     }
 
-    @Test
     public void testPeformance(){
         float count = 10000;
         float firstRun,secondRun, thirdRun;
@@ -103,7 +102,6 @@ public class VServerCrudTest extends SpringAwareCrudTest<String, VServer> {
     }
 
 
-    @Test
     public void ApiSampleShowCase() {
         VServer vServer1 = createValidEntity();
         VServer vServer2 = createValidEntity();

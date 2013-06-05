@@ -1,9 +1,9 @@
-package net.engio.common.persistence.spec.spex;
+package net.engio.daoism.dao.spex;
 
 import net.engio.common.xpress.operators.GreaterOrEqual;
 import net.engio.common.xpress.operators.GreaterThan;
 import net.engio.common.xpress.operators.LessThan;
-import net.engio.common.xpress.types.CComparable;
+import net.engio.common.xpress.types.ObjectType;
 
 /**
  * Created with IntelliJ IDEA.
@@ -12,9 +12,9 @@ import net.engio.common.xpress.types.CComparable;
  * Time: 3:53 PM
  * To change this template use File | Settings | File Templates.
  */
-public interface Ordered<IN, OUT> extends
-        CComparable<IN, OUT>,
+public interface ComparableType<IN, OUT> extends
+        ObjectType<IN, OUT>,
         GreaterThan<IN, OUT>,
         LessThan<IN, OUT>,
-        GreaterOrEqual {
+        GreaterOrEqual<IN, OUT> {
 }
