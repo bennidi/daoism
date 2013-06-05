@@ -1,4 +1,4 @@
-package net.engio.common.persistence.spec.spex;
+package net.engio.daoism.dao.spex;
 
 /**
  * Created with IntelliJ IDEA.
@@ -7,14 +7,15 @@ package net.engio.common.persistence.spec.spex;
  * Time: 3:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public abstract class NavigableAttribute {
+public abstract class Attribute implements IAttribute{
 
     public String path;
 
-    protected NavigableAttribute(String path) {
+    protected Attribute(String path) {
         this.path = path;
     }
 
+    @Override
     public String getPath() {
         return path;
     }

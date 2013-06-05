@@ -21,13 +21,6 @@
     <dependencies>
 
 
-
-        <dependency>
-            <groupId>net.engio</groupId>
-            <artifactId>spex</artifactId>
-            <version>1.0.0.RC1</version>
-        </dependency>
-
         <dependency>
             <groupId>net.engio</groupId>
             <artifactId>xpress</artifactId>

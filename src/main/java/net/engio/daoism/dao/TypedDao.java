@@ -1,11 +1,11 @@
 package net.engio.daoism.dao;
 
-import net.engio.common.spex.ISpecification;
 import net.engio.daoism.Entity;
 import net.engio.daoism.dao.query.ISelect;
 import net.engio.daoism.dao.query.Options.AccessPlan;
 import net.engio.daoism.dao.query.Query;
 import net.engio.daoism.dao.query.Query.TypedQuery;
+import net.engio.daoism.dao.spex.ISpecification;
 
 import java.io.Serializable;
 import java.util.Collection;
@@ -55,7 +55,7 @@ public abstract class TypedDao<K extends Serializable , E extends Entity<K>> imp
 	}
 
 	@Override
-	public boolean exists(ISpecification<?> specification) {
+	public boolean exists(ISpecification specification) {
 		return getDao().exists(entityClass, specification);
 	}
 
@@ -75,12 +75,12 @@ public abstract class TypedDao<K extends Serializable , E extends Entity<K>> imp
 	}
 
 	@Override
-	public E find(ISpecification<?> specification) {
+	public E find(ISpecification specification) {
 		return getDao().find(entityClass, specification);
 	}
 	
 	@Override
-	public List<E> findAll(ISpecification<?> specification) {
+	public List<E> findAll(ISpecification specification) {
 		return getDao().findAll(entityClass, specification);
 	}
 
@@ -108,7 +108,7 @@ public abstract class TypedDao<K extends Serializable , E extends Entity<K>> imp
 	}
 
 	@Override
-	public long count(ISpecification<?> specification) {
+	public long count(ISpecification specification) {
 		return getDao().count(entityClass, specification);
 	}
 

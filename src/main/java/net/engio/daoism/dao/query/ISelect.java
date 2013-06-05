@@ -1,11 +1,11 @@
 package net.engio.daoism.dao.query;
 
+import net.engio.daoism.Entity;
+import net.engio.daoism.dao.spex.IAttribute;
+import net.engio.daoism.dao.spex.ISpecification;
+
 import java.io.Serializable;
 import java.util.Map;
-
-import net.engio.daoism.Entity;
-import net.engio.common.spex.ISpecification;
-import net.engio.common.spex.attr.IAttribute;
 
 
 /**
@@ -23,7 +23,7 @@ import net.engio.common.spex.attr.IAttribute;
  */
 
 
-public interface ISelect<T extends Entity<?>> extends Serializable {
+public interface ISelect<T extends Entity<? extends Serializable>> extends Serializable {
 
 	/**
 	 * Enumeration of available sort orders for result set ordering
@@ -43,7 +43,7 @@ public interface ISelect<T extends Entity<?>> extends Serializable {
 	 * @param association The attribute that represents the relation that should be fetched eagerly
 	 * @return The finder instance
 	 */
-	public abstract ISelect<T> loadEager(IAttribute<?> association);
+	public abstract ISelect<T> loadEager(IAttribute association);
 
 	
 	/**
@@ -56,9 +56,9 @@ public interface ISelect<T extends Entity<?>> extends Serializable {
 
 	public abstract Map<String, SortOrder> getOrderStatements();
 
-	public abstract ISpecification< ?> getSpecification();
+	public abstract ISpecification getSpecification();
 
-	public abstract ISelect<T> OrderBy(IAttribute<?> attribute, SortOrder direction);
+	public abstract ISelect<T> OrderBy(IAttribute attribute, SortOrder direction);
 	
 	public abstract Class<T> getQueryRoot();
 

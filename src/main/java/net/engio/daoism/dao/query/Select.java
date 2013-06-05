@@ -1,12 +1,13 @@
 package net.engio.daoism.dao.query;
 
+import net.engio.daoism.Entity;
+import net.engio.daoism.dao.spex.IAttribute;
+import net.engio.daoism.dao.spex.ISpecification;
+
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
-import net.engio.daoism.Entity;
-import net.engio.common.spex.ISpecification;
-import net.engio.common.spex.attr.IAttribute;
 
 
 /**
@@ -16,7 +17,7 @@ import net.engio.common.spex.attr.IAttribute;
  *
  * @param <T>
  */
-public class Select<T extends Entity<?>> implements ISelect<T> {
+public class Select<T extends Entity<? extends Serializable>> implements ISelect<T> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,11 +25,11 @@ public class Select<T extends Entity<?>> implements ISelect<T> {
 
 	private Map<String, SortOrder> orderBy = new LinkedHashMap<String, SortOrder>(5); // insertion-ordered map;
 
-	private ISpecification< ?> whereClause;
+	private ISpecification whereClause;
 	
 	private Class<T> queryRoot; 
 
-	public Select(Class<T> queryRoot, ISpecification< ?> specification) {
+	public Select(Class<T> queryRoot, ISpecification specification) {
 		super();
 		this.whereClause = specification;
 		this.queryRoot = queryRoot;
@@ -39,7 +40,7 @@ public class Select<T extends Entity<?>> implements ISelect<T> {
 		this.queryRoot = queryRoot;
 	}
 	
-	public Select<T> Where(ISpecification< ?> whereClause){
+	public Select<T> Where(ISpecification whereClause){
 		this.whereClause = whereClause;
 		return this;
 	}
@@ -55,13 +56,13 @@ public class Select<T extends Entity<?>> implements ISelect<T> {
 	}
 
 	@Override
-	public ISpecification< ?> getSpecification() {
+	public ISpecification getSpecification() {
 		return whereClause;
 	}
 	
 	@Override
-	public ISelect<T> OrderBy(IAttribute<?> attribute, SortOrder direction) {
-		orderBy.put(attribute.getName(), direction);
+	public ISelect<T> OrderBy(IAttribute attribute, SortOrder direction) {
+		orderBy.put(attribute.getPath(), direction);
 		return this;
 	}
 
@@ -71,12 +72,12 @@ public class Select<T extends Entity<?>> implements ISelect<T> {
 	}
 
 	@Override
-	public ISelect<T> loadEager(IAttribute<?> relation) {
-		eagerAssociations.put(relation.getName(), "LEFT");
+	public ISelect<T> loadEager(IAttribute relation) {
+		eagerAssociations.put(relation.getPath(), "LEFT");
 		return this;
 	}
 	
-	public static <T extends Entity<?>> Select<T> From(Class<T> queryRoot){
+	public static <T extends Entity<? extends Serializable>> Select<T> From(Class<T> queryRoot){
 		return new Select<T>(queryRoot);
 	}
 	

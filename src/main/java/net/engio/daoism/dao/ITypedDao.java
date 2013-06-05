@@ -1,15 +1,15 @@
 package net.engio.daoism.dao;
 
+import net.engio.daoism.Entity;
+import net.engio.daoism.dao.query.ISelect;
+import net.engio.daoism.dao.query.Options.AccessPlan;
+import net.engio.daoism.dao.query.Query;
+import net.engio.daoism.dao.query.Query.TypedQuery;
+import net.engio.daoism.dao.spex.ISpecification;
+
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
-
-import net.engio.daoism.Entity;
-import net.engio.daoism.dao.query.Options.AccessPlan;
-import net.engio.daoism.dao.query.ISelect;
-import net.engio.daoism.dao.query.Query;
-import net.engio.daoism.dao.query.Query.TypedQuery;
-import net.engio.common.spex.ISpecification;
 
 /**
  * A generically typed version of the {@link IDao} interface. It provides type-safe method for domain object persistence. The typed dao can
@@ -47,7 +47,7 @@ public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
 	 * 
 	 * @see IDao
 	 */
-	boolean exists(ISpecification<?> specification);
+	boolean exists(ISpecification specification);
 
 	/**
 	 * See corresponding method in IDao.
@@ -82,14 +82,14 @@ public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
 	 * 
 	 * @see IDao
 	 */
-	E find(ISpecification<?> specification);
+	E find(ISpecification specification);
 	
 	/**
 	 * See corresponding method in IDao.
 	 * 
 	 * @see IDao
 	 */
-	List<E> findAll(ISpecification<?> specification);
+	List<E> findAll(ISpecification specification);
 
 	/**
 	 * See corresponding method in IDao.
@@ -124,7 +124,7 @@ public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
 	 * 
 	 * @see IDao
 	 */
-	long count(ISpecification<?> specification);
+	long count(ISpecification specification);
 	
 
 	E find(TypedQuery query);

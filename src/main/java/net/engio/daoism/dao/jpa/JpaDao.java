@@ -1,6 +1,5 @@
 package net.engio.daoism.dao.jpa;
 
-import net.engio.common.spex.ISpecification;
 import net.engio.daoism.Entity;
 import net.engio.daoism.dao.IDao;
 import net.engio.daoism.dao.IUnitOfWork;
@@ -9,6 +8,8 @@ import net.engio.daoism.dao.query.LockType;
 import net.engio.daoism.dao.query.Options;
 import net.engio.daoism.dao.query.Options.AccessPlan;
 import net.engio.daoism.dao.query.Query;
+import net.engio.daoism.dao.spex.ISpecification;
+import net.engio.daoism.dao.spex.QueryGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,16 +37,18 @@ public abstract class JpaDao implements IDao{
 
 
 	private Logger log = LoggerFactory.getLogger(getClass());
+
+    private QueryGenerator jpaQueryGenerator = new QueryGenerator();
 	
 	public abstract EntityManager entityManager();
 	
 
 	@Override
-	public <D extends Entity<?>> boolean delete(Class<D> domainClass, D domainObject) {
+	public <D extends Entity<? extends Serializable>> boolean delete(Class<D> domainClass, D domainObject) {
 		return deleteInternal(domainClass, domainObject);
 	}
 
-    private <D extends Entity<?>> boolean deleteInternal(Class<D> domainClass, D domainObject) {
+    private <D extends Entity<? extends Serializable>> boolean deleteInternal(Class<D> domainClass, D domainObject) {
         // REVIEW: There is no exception thrown by the entityManager().remove() that
         // could actually be handled by the application
         // even stale objects can be removed without any exception from Hibernate
@@ -61,7 +64,7 @@ public abstract class JpaDao implements IDao{
     }
 
 	@Override
-	public <D extends Entity<?>> boolean deleteAll(Class<D> domainClass, Collection<D> domainObjects) {
+	public <D extends Entity<? extends Serializable>> boolean deleteAll(Class<D> domainClass, Collection<D> domainObjects) {
 		boolean allDelected = true;
         for (D domainObject : domainObjects) {
 			allDelected = allDelected & deleteInternal(domainClass, domainObject);
@@ -70,23 +73,23 @@ public abstract class JpaDao implements IDao{
 	}
 
 	@Override
-	public <D extends Entity<?>> boolean exists(Class<D> domainClass, ISpecification<?> specification) {
+	public <D extends Entity<? extends Serializable>> boolean exists(Class<D> domainClass, ISpecification specification) {
 		return count(domainClass, specification) > 0;
 	}
 
 	@Override
-	public <D extends Entity<?>> List<D> findAll(Class<D> domainClass) {
+	public <D extends Entity<? extends Serializable>> List<D> findAll(Class<D> domainClass) {
 		return entityManager().createQuery("SELECT en FROM " + domainClass.getName() + " en", domainClass)
 			.getResultList();
 	}
 
 	@Override
-	public <D extends Entity<?>> D findById(Class<D> domainClass, Serializable id) {
+	public <D extends Entity<? extends Serializable>> D findById(Class<D> domainClass, Serializable id) {
 		return findById(domainClass, id, Options.Default());
 	}
 
 	@Override
-	public <D extends Entity<?>> D findById(Class<D> domainClass, Serializable id, AccessPlan options) {
+	public <D extends Entity<? extends Serializable>> D findById(Class<D> domainClass, Serializable id, AccessPlan options) {
 		if (id == null) {
 			return null;
 		}
@@ -116,25 +119,23 @@ public abstract class JpaDao implements IDao{
 	}
 
 	@Override
-	public <D extends Entity<?>> List<D> findAll(Class<D> domainClass, ISelect<D> finder) {
-		return entityManager().createQuery(enrichQuery(entityManager().getCriteriaBuilder()
-                .createQuery(domainClass), domainClass, finder))
+	public <D extends Entity<? extends Serializable>> List<D> findAll(Class<D> domainClass, ISelect<D> finder) {
+		return entityManager().createQuery(enrichQuery(domainClass, finder))
 			.getResultList();
 	}
 	
 	@Override
-	public <D extends Entity<?>> D find(Class<D> domainClass,
-			ISpecification<?> specification) {
-		List<D> results = entityManager().createQuery(enrichQuery(entityManager().getCriteriaBuilder()
-                .createQuery(domainClass), domainClass, specification))
+	public <D extends Entity<? extends Serializable>> D find(Class<D> domainClass,
+			ISpecification specification) {
+		List<D> results = entityManager().createQuery(transformSpecification(domainClass, specification))
 				.setMaxResults(1)
 				.getResultList();
 		return results.isEmpty() ? null : results.get(0);
 	}
 
-	private <D extends Entity<?>> CriteriaQuery<D> enrichQuery(CriteriaQuery query, Class<D> domainClass, ISelect<D> finder) {
+	private <D extends Entity<? extends Serializable>> CriteriaQuery<D> enrichQuery(Class<D> domainClass, ISelect<D> finder) {
 		CriteriaBuilder criteriaBuilder = entityManager().getCriteriaBuilder();
-		enrichQuery(query, domainClass, finder.getSpecification());
+		CriteriaQuery query = transformSpecification(domainClass, finder.getSpecification());
 		Root<D> root = (Root<D>) query.getRoots()
 			.toArray()[0]; // ugly way of getting the one and only query root
 
@@ -158,29 +159,24 @@ public abstract class JpaDao implements IDao{
 		return query;
 	}
 
-	private <D extends Entity<?>> CriteriaQuery<D> enrichQuery(CriteriaQuery query, Class<D> domainClass, ISpecification<?> specification) {
-		Root<D> root = query.from(domainClass);
-		if (specification != null)
-			query.where(specification.toJpaPredicate(entityManager().getCriteriaBuilder(), query, root));
-		query.select(root);
-		return query;
+	private <D extends Entity<? extends Serializable>> CriteriaQuery<D> transformSpecification(Class<D> domainClass, ISpecification specification) {
+		return jpaQueryGenerator.buildQuery(specification, domainClass, entityManager().getCriteriaBuilder());
 	}
 
 	@Override
-	public <D extends Entity<?>> List<D> findAll(Class<D> domainClass, ISpecification<?> specification) {
+	public <D extends Entity<? extends Serializable>> List<D> findAll(Class<D> domainClass, ISpecification specification) {
 
-		return entityManager().createQuery(enrichQuery(entityManager().getCriteriaBuilder()
-                .createQuery(domainClass), domainClass, specification))
+		return entityManager().createQuery(transformSpecification(domainClass, specification))
 			.getResultList();
 
 	}
 
 	@Override
-	public <D extends Entity<?>> D persist(Class<D> domainClass, D domainObject) {
+	public <D extends Entity<? extends Serializable>> D persist(Class<D> domainClass, D domainObject) {
 		return persistInternal(domainClass, domainObject);
 	}
 
-    private <D extends Entity<?>> D persistInternal(Class<D> domainClass, D domainObject) {
+    private <D extends Entity<? extends Serializable>> D persistInternal(Class<D> domainClass, D domainObject) {
         if (domainObject == null)
             return null;
         // check if update or insert
@@ -202,12 +198,12 @@ public abstract class JpaDao implements IDao{
      *
      * @return true, if persistent. false otherwise
      */
-	protected <D extends Entity<?>> boolean isPersistent(D domainObject) {
+	protected <D extends Entity<? extends Serializable>> boolean isPersistent(D domainObject) {
 		return domainObject.getVersion() > -1;
 	}
 
 	@Override
-	public <D extends Entity<?>> List<D> persistAll(Class<D> domainClass, List<D> domainObjects) {
+	public <D extends Entity<? extends Serializable>> List<D> persistAll(Class<D> domainClass, List<D> domainObjects) {
 		List<D> persistentObjects = new ArrayList<D>(domainObjects.size());
 		if (domainObjects != null) {
 			for (D domainObject : domainObjects) {
@@ -230,20 +226,18 @@ public abstract class JpaDao implements IDao{
 	}
 
 	@Override
-	public <D extends Entity<?>> long count(Class<D> domainClass) {
+	public <D extends Entity<? extends Serializable>> long count(Class<D> domainClass) {
 		// null is treated like an empty specification
 		return count(domainClass, null);
 	}
 
 	@Override
-	public <D extends Entity<?>> long count(Class<D> domainClass, ISpecification<?> specification) {
+	public <D extends Entity<? extends Serializable>> long count(Class<D> domainClass, ISpecification specification) {
 		CriteriaBuilder builder = entityManager().getCriteriaBuilder();
 
 		// create the query with result of type long
-		CriteriaQuery<Long> countCriteria = builder.createQuery(Long.class);
+		CriteriaQuery<Long> countCriteria = jpaQueryGenerator.buildQuery(specification, domainClass, builder);
 		// add the specification constraints and query root
-		enrichQuery(countCriteria, domainClass, specification);
-		// get the root (there is only a single root)
 		Root<D> entityRoot = (Root<D>) countCriteria.getRoots()
 			.toArray()[0];
 		// now add the count projection
@@ -253,7 +247,7 @@ public abstract class JpaDao implements IDao{
 	}
 	
 	@Override
-	public <E extends Entity<?>> List<E> findAll(Class<E> entityClass, Query.TypedQuery query) {
+	public <E extends Entity<? extends Serializable>> List<E> findAll(Class<E> entityClass, Query.TypedQuery query) {
 		javax.persistence.TypedQuery<E> jpaQuery = transformQuery(entityClass, query);
 		return jpaQuery.getResultList();
 	}
