@@ -14,3 +14,7 @@
 # generated ddl #
 *.jdbc
 
+# build directories #
+#target
+#target/
+

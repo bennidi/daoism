@@ -1,61 +1,224 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite failures="0" time="0.018" errors="0" skipped="0" tests="1" name="net.engio.common.persistence.spec.spex.TestQueryGenerator">
+<testsuite failures="3" time="0.21" errors="0" skipped="0" tests="4" name="net.engio.common.persistence.spec.spex.TestQueryGenerator">
   <properties>
-    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
-    <property name="sun.boot.library.path" value="/usr/lib/jvm/jdk1.6.0_38/jre/lib/amd64"/>
-    <property name="java.vm.version" value="20.13-b02"/>
-    <property name="java.vm.vendor" value="Sun Microsystems Inc."/>
-    <property name="java.vendor.url" value="http://java.sun.com/"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-7-openjdk-i386/jre/lib/i386"/>
+    <property name="java.vm.version" value="23.7-b01"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
-    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="java.vm.name" value="OpenJDK Server VM"/>
     <property name="file.encoding.pkg" value="sun.io"/>
     <property name="user.country" value="US"/>
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/benjamin/Development/workspaces/persistence"/>
-    <property name="java.runtime.version" value="1.6.0_38-b05"/>
+    <property name="user.dir" value="/home/bennidi/Development/workspaces/persistence/daoism"/>
+    <property name="java.runtime.version" value="1.7.0_21-b02"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
-    <property name="java.endorsed.dirs" value="/usr/lib/jvm/jdk1.6.0_38/jre/lib/endorsed"/>
-    <property name="os.arch" value="amd64"/>
+    <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-7-openjdk-i386/jre/lib/endorsed"/>
+    <property name="os.arch" value="i386"/>
     <property name="java.io.tmpdir" value="/tmp"/>
     <property name="line.separator" value="
 "/>
-    <property name="java.vm.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Linux"/>
     <property name="classworlds.conf" value="/usr/share/maven2/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
-    <property name="java.library.path" value="/usr/lib/jvm/jdk1.6.0_38/jre/lib/amd64/server:/usr/lib/jvm/jdk1.6.0_38/jre/lib/amd64:/usr/lib/jvm/jdk1.6.0_38/jre/../lib/amd64:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="java.library.path" value="/usr/java/packages/lib/i386:/usr/lib/jni:/lib:/usr/lib"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="java.class.version" value="50.0"/>
-    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="3.5.0-17-generic"/>
-    <property name="user.home" value="/home/benjamin"/>
+    <property name="java.class.version" value="51.0"/>
+    <property name="sun.management.compiler" value="HotSpot Tiered Compilers"/>
+    <property name="os.version" value="3.8.0-19-generic"/>
+    <property name="user.home" value="/home/bennidi"/>
     <property name="user.timezone" value="Europe/Berlin"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="java.specification.version" value="1.6"/>
-    <property name="user.name" value="benjamin"/>
+    <property name="java.specification.version" value="1.7"/>
+    <property name="user.name" value="bennidi"/>
     <property name="java.class.path" value="/usr/share/maven2/boot/classworlds.jar"/>
-    <property name="java.vm.specification.version" value="1.0"/>
-    <property name="sun.arch.data.model" value="64"/>
-    <property name="java.home" value="/usr/lib/jvm/jdk1.6.0_38/jre"/>
+    <property name="java.vm.specification.version" value="1.7"/>
+    <property name="sun.arch.data.model" value="32"/>
+    <property name="java.home" value="/usr/lib/jvm/java-7-openjdk-i386/jre"/>
     <property name="sun.java.command" value="org.codehaus.classworlds.Launcher &quot;clean&quot; &quot;package&quot;"/>
-    <property name="java.specification.vendor" value="Sun Microsystems Inc."/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="user.language" value="en"/>
+    <property name="awt.toolkit" value="sun.awt.X11.XToolkit"/>
     <property name="java.vm.info" value="mixed mode"/>
-    <property name="java.version" value="1.6.0_38"/>
-    <property name="java.ext.dirs" value="/usr/lib/jvm/jdk1.6.0_38/jre/lib/ext:/usr/java/packages/lib/ext"/>
+    <property name="java.version" value="1.7.0_21"/>
+    <property name="java.ext.dirs" value="/usr/lib/jvm/java-7-openjdk-i386/jre/lib/ext:/usr/java/packages/lib/ext"/>
     <property name="securerandom.source" value="file:/dev/./urandom"/>
-    <property name="sun.boot.class.path" value="/usr/lib/jvm/jdk1.6.0_38/jre/lib/resources.jar:/usr/lib/jvm/jdk1.6.0_38/jre/lib/rt.jar:/usr/lib/jvm/jdk1.6.0_38/jre/lib/sunrsasign.jar:/usr/lib/jvm/jdk1.6.0_38/jre/lib/jsse.jar:/usr/lib/jvm/jdk1.6.0_38/jre/lib/jce.jar:/usr/lib/jvm/jdk1.6.0_38/jre/lib/charsets.jar:/usr/lib/jvm/jdk1.6.0_38/jre/lib/modules/jdk.boot.jar:/usr/lib/jvm/jdk1.6.0_38/jre/classes"/>
-    <property name="java.vendor" value="Sun Microsystems Inc."/>
+    <property name="sun.boot.class.path" value="/usr/lib/jvm/java-7-openjdk-i386/jre/lib/resources.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/rt.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/sunrsasign.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/jsse.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/jce.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/charsets.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/netx.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/plugin.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/rhino.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/lib/jfr.jar:/usr/lib/jvm/java-7-openjdk-i386/jre/classes"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
     <property name="maven.home" value="/usr/share/maven2"/>
     <property name="file.separator" value="/"/>
-    <property name="java.vendor.url.bug" value="http://java.sun.com/cgi-bin/bugreport.cgi"/>
+    <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="sun.desktop" value="gnome"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase time="0.018" classname="net.engio.common.persistence.spec.spex.TestQueryGenerator" name="testSimpleQueryGeneration"/>
+  <testcase time="0.15" classname="net.engio.common.persistence.spec.spex.TestQueryGenerator" name="testCount"/>
+  <testcase time="0.02" classname="net.engio.common.persistence.spec.spex.TestQueryGenerator" name="testGreaterThan">
+    <failure message="expected:&lt;1&gt; but was:&lt;2&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;1&gt; but was:&lt;2&gt;
+	at org.junit.Assert.fail(Assert.java:93)
+	at org.junit.Assert.failNotEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:128)
+	at org.junit.Assert.assertEquals(Assert.java:147)
+	at net.engio.daoism.test.JUnitTest.assertEquals(JUnitTest.java:182)
+	at net.engio.common.persistence.spec.spex.TestQueryGenerator.testGreaterThan(TestQueryGenerator.java:58)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:18)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+    <system-out>[EL Fine]: sql: 2013-06-05 12:29:10.187--ClientSession(22202345)--Connection(9477349)--Thread(Thread[main,5,main])--INSERT INTO VSERVER (v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	bind =&gt; [7df091f5-a53c-4cd7-89bf-5f3bda5f3f1a, 2013-06-07, null, null, 10, 10, 2013-06-05 12:29:10.187, 2013-06-05 12:29:10.187, 1]
+[EL Fine]: sql: 2013-06-05 12:29:10.19--ClientSession(11784771)--Connection(14466147)--Thread(Thread[main,5,main])--INSERT INTO VSERVER (v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	bind =&gt; [1dbc84e8-aa0e-448c-9e86-b3e8507e4ac2, 2013-06-07, null, null, 10, 5, 2013-06-05 12:29:10.19, 2013-06-05 12:29:10.19, 1]
+[EL Fine]: sql: 2013-06-05 12:29:10.199--ServerSession(26935011)--Connection(7467247)--Thread(Thread[main,5,main])--SELECT v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION FROM VSERVER WHERE (NUMBEROFNICS &gt; NUMBEROFPORTS)
+</system-out>
+  </testcase>
+  <testcase time="0.027" classname="net.engio.common.persistence.spec.spex.TestQueryGenerator" name="testOr">
+    <failure message="expected:&lt;2&gt; but was:&lt;6&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;2&gt; but was:&lt;6&gt;
+	at org.junit.Assert.fail(Assert.java:93)
+	at org.junit.Assert.failNotEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:128)
+	at org.junit.Assert.assertEquals(Assert.java:147)
+	at net.engio.daoism.test.JUnitTest.assertEquals(JUnitTest.java:182)
+	at net.engio.common.persistence.spec.spex.TestQueryGenerator.testOr(TestQueryGenerator.java:85)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:18)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+    <system-out>[EL Fine]: sql: 2013-06-05 12:29:10.207--ClientSession(17203311)--Connection(776667)--Thread(Thread[main,5,main])--INSERT INTO VSERVER (v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	bind =&gt; [b515668a-ed9c-47ea-9617-5a557d0c724c, 2013-06-07, null, null, 10, 10, 2013-06-05 12:29:10.207, 2013-06-05 12:29:10.207, 1]
+[EL Fine]: sql: 2013-06-05 12:29:10.211--ClientSession(19706735)--Connection(28958638)--Thread(Thread[main,5,main])--INSERT INTO VSERVER (v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	bind =&gt; [a59e57d6-f4e0-476e-9c01-1c7a25b9eae2, 2013-06-07, null, null, 10, 5, 2013-06-05 12:29:10.21, 2013-06-05 12:29:10.21, 1]
+[EL Fine]: sql: 2013-06-05 12:29:10.225--ServerSession(26935011)--Connection(17335124)--Thread(Thread[main,5,main])--SELECT v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION FROM VSERVER WHERE ((NUMBEROFNICS &gt; NUMBEROFPORTS) OR (NUMBEROFPORTS &gt; ?))
+	bind =&gt; [8]
+</system-out>
+  </testcase>
+  <testcase time="0.012" classname="net.engio.common.persistence.spec.spex.TestQueryGenerator" name="testSimpleQueryGeneration">
+    <failure message="expected:&lt;1&gt; but was:&lt;7&gt;" type="java.lang.AssertionError">java.lang.AssertionError: expected:&lt;1&gt; but was:&lt;7&gt;
+	at org.junit.Assert.fail(Assert.java:93)
+	at org.junit.Assert.failNotEquals(Assert.java:647)
+	at org.junit.Assert.assertEquals(Assert.java:128)
+	at org.junit.Assert.assertEquals(Assert.java:147)
+	at net.engio.daoism.test.JUnitTest.assertEquals(JUnitTest.java:182)
+	at net.engio.common.persistence.spec.spex.TestQueryGenerator.testSimpleQueryGeneration(TestQueryGenerator.java:39)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:45)
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:15)
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:42)
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:20)
+	at org.junit.internal.runners.statements.RunBefores.evaluate(RunBefores.java:28)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:74)
+	at org.junit.internal.runners.statements.RunAfters.evaluate(RunAfters.java:30)
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:83)
+	at org.junit.rules.TestWatcher$1.evaluate(TestWatcher.java:47)
+	at org.junit.rules.RunRules.evaluate(RunRules.java:18)
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:72)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:231)
+	at org.junit.runners.BlockJUnit4ClassRunner.runChild(BlockJUnit4ClassRunner.java:47)
+	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:231)
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:60)
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:229)
+	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:50)
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:222)
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:71)
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:300)
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:174)
+	at org.apache.maven.surefire.junit4.JUnit4TestSet.execute(JUnit4TestSet.java:53)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:123)
+	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:104)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:601)
+	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:164)
+	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:110)
+	at org.apache.maven.surefire.booter.SurefireStarter.invokeProvider(SurefireStarter.java:175)
+	at org.apache.maven.surefire.booter.SurefireStarter.runSuitesInProcessWhenForked(SurefireStarter.java:107)
+	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:68)
+</failure>
+    <system-out>[EL Fine]: sql: 2013-06-05 12:29:10.234--ClientSession(17305036)--Connection(16983056)--Thread(Thread[main,5,main])--INSERT INTO VSERVER (v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+	bind =&gt; [7f681587-6899-431e-a93b-645b99095754, 2013-06-07, null, null, 0, 0, 2013-06-05 12:29:10.234, 2013-06-05 12:29:10.234, 1]
+[EL Fine]: sql: 2013-06-05 12:29:10.238--ServerSession(26935011)--Connection(1757601)--Thread(Thread[main,5,main])--SELECT v_uuid, GENERATED, v_host, v_name, NUMBEROFNICS, NUMBEROFPORTS, TSCREATED, TSLASTMODIFIED, VERSION FROM VSERVER WHERE (GENERATED &gt; ?)
+	bind =&gt; [2013-06-05]
+</system-out>
+  </testcase>
 </testsuite>
