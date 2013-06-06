@@ -15,6 +15,6 @@
 *.jdbc
 
 # build directories #
-#target
-#target/
+target
+target/*
 
