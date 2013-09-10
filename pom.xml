@@ -3,11 +3,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>net.engio</groupId>
-    <artifactId>persistence</artifactId>
+    <artifactId>daoism</artifactId>
     <version>1.0.0.RC1</version>
     <packaging>jar</packaging>
-    <name>persistence</name>
-    <description>Persistence implementation using DAO pattern</description>
+    <name>daoism</name>
+    <description>Persistence implementation for JPA using DAOs and specification pattern </description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
