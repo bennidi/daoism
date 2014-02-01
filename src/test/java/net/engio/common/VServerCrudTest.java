@@ -9,7 +9,6 @@ import net.engio.daoism.dao.jpa.UnitOfWork;
 import net.engio.daoism.dao.query.LockType;
 import net.engio.daoism.dao.query.Options;
 import net.engio.daoism.dao.query.Query;
-import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.TransactionRequiredException;

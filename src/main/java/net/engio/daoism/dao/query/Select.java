@@ -1,6 +1,6 @@
 package net.engio.daoism.dao.query;
 
-import net.engio.daoism.Entity;
+import net.engio.daoism.Persistent;
 import net.engio.daoism.dao.spex.IAttribute;
 import net.engio.daoism.dao.spex.ISpecification;
 
@@ -17,7 +17,7 @@ import java.util.Map;
  *
  * @param <T>
  */
-public class Select<T extends Entity<? extends Serializable>> implements ISelect<T> {
+public class Select<T extends Persistent<? extends Serializable>> implements ISelect<T> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -77,7 +77,7 @@ public class Select<T extends Entity<? extends Serializable>> implements ISelect
 		return this;
 	}
 	
-	public static <T extends Entity<? extends Serializable>> Select<T> From(Class<T> queryRoot){
+	public static <T extends Persistent<? extends Serializable>> Select<T> From(Class<T> queryRoot){
 		return new Select<T>(queryRoot);
 	}
 	

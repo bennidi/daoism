@@ -1,6 +1,6 @@
 package net.engio.common.domain;
 
-import net.engio.daoism.dao.IDao;
+import net.engio.daoism.dao.IPersistenceProvider;
 import net.engio.daoism.dao.TypedDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class VServerDao extends TypedDao<String, VServer> {
 
     @Autowired
-    private DbDao dbDao;
+    private DbPersistenceProvider persistenceProvider;
 
     public VServerDao() {
         super(String.class, VServer.class);
@@ -17,7 +17,7 @@ public class VServerDao extends TypedDao<String, VServer> {
 
 
     @Override
-    protected IDao getDao() {
-        return dbDao;
+    protected IPersistenceProvider getPersistenceProvider() {
+        return persistenceProvider;
     }
 }

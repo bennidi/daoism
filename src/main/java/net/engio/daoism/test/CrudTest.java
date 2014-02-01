@@ -1,6 +1,6 @@
 package net.engio.daoism.test;
 
-import net.engio.daoism.Entity;
+import net.engio.daoism.Persistent;
 import net.engio.daoism.dao.ITypedDao;
 import net.engio.daoism.dao.jpa.UnitOfWork;
 import org.junit.Test;
@@ -20,7 +20,7 @@ import java.util.Random;
  * @param <KEY>
  * @param <EN>
  */
-public abstract class CrudTest<KEY extends Serializable, EN extends Entity<KEY>> extends JUnitTest {
+public abstract class CrudTest<KEY extends Serializable, EN extends Persistent<KEY>> extends JUnitTest {
 
 	private long entityCount;
 	
@@ -29,7 +29,7 @@ public abstract class CrudTest<KEY extends Serializable, EN extends Entity<KEY>>
 	 * This method is used by generic CRUD tests and should return a valid, non-persistent instance of {@code A}. Every call to this method
 	 * should result in the same output!
 	 * 
-	 * @return a valid non-persistent instance of {@link net.engio.daoism.Entity}
+	 * @return a valid non-persistent instance of {@link net.engio.daoism.Persistent}
 	 */
 	protected abstract EN createValidEntity();
 
@@ -39,7 +39,7 @@ public abstract class CrudTest<KEY extends Serializable, EN extends Entity<KEY>>
 	/**
 	 * Factory method to obtain a reference to the repository that manages the tests aggregates
 	 * 
-	 * @return an instance to the repository that manages the {@link net.engio.daoism.Entity} of the tests
+	 * @return an instance to the repository that manages the {@link net.engio.daoism.Persistent} of the tests
 	 */
 	protected abstract ITypedDao<KEY, EN> getDao();
 	

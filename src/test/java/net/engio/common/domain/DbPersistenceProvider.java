@@ -1,8 +1,8 @@
 package net.engio.common.domain;
 
-import net.engio.daoism.Entity;
+import net.engio.daoism.Persistent;
 import net.engio.daoism.dao.IUnitOfWork;
-import net.engio.daoism.dao.jpa.JpaDao;
+import net.engio.daoism.dao.jpa.JpaPersistenceProvider;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Service
-public class DbDao extends JpaDao{
+public class DbPersistenceProvider extends JpaPersistenceProvider {
 
     @PersistenceContext
     private EntityManager em;
@@ -24,22 +24,22 @@ public class DbDao extends JpaDao{
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public <D extends Entity<?>> D persist(Class<D> domainClass, D domainObject) {
+    public <D extends Persistent<?>> D persist(Class<D> domainClass, D domainObject) {
         return super.persist(domainClass, domainObject);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public <D extends Entity<?>> List<D> persistAll(Class<D> domainClass, List<D> domainObjects) {
+    public <D extends Persistent<?>> List<D> persistAll(Class<D> domainClass, List<D> domainObjects) {
         return super.persistAll(domainClass, domainObjects);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public <D extends Entity<?>> boolean deleteAll(Class<D> domainClass, Collection<D> domainObjects) {
+    public <D extends Persistent<?>> boolean deleteAll(Class<D> domainClass, Collection<D> domainObjects) {
         return super.deleteAll(domainClass, domainObjects);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public <D extends Entity<?>> boolean delete(Class<D> domainClass, D domainObject) {
+    public <D extends Persistent<?>> boolean delete(Class<D> domainClass, D domainObject) {
         return super.delete(domainClass, domainObject);
     }
 

@@ -1,36 +1,33 @@
 package net.engio.daoism.dao;
 
-import net.engio.daoism.Entity;
+import net.engio.daoism.Persistent;
 import net.engio.daoism.dao.query.ISelect;
 import net.engio.daoism.dao.query.Options.AccessPlan;
 import net.engio.daoism.dao.query.Query;
 import net.engio.daoism.dao.query.Query.TypedQuery;
-import net.engio.daoism.dao.spex.ISpecification;
 
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
 /**
- * A generically typed version of the {@link IDao} interface. It provides type-safe method for domain object persistence. The typed dao can
- * be accessed using an instance of {@link IRepository} in case that it should be necessary to directly access and/or persist instances of
- * {@link net.engio.daoism.Entity}. {@link This} interface offers exactly the same functionality as the {@link IDao}, meaning that the corresponding
- * methods share the same semantics
+ * A typed version of the {@link IPersistenceProvider} interface. It provides type-safe method for domain object persistence.
+ *
  * 
  * @author Benjamin Diedrichsen
  * 
  * @param <KEY>
- *            The type of primary key used for the {@link net.engio.daoism.Entity}
+ *            The type of primary key used for the {@link net.engio.daoism.Persistent}
  * @param <E>
  *            The type of domain object the instance of {@link ITypedDao} works on
  */
 
-public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
+public interface ITypedDao<KEY extends Serializable, E extends Persistent<KEY>> {
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	boolean delete(E entity);
 
@@ -38,94 +35,67 @@ public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
 	 * See corresponding method in IDao.
 	 * 
 	 * @return
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	boolean deleteAll(Collection<E> entities);
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
-	 */
-	boolean exists(ISpecification specification);
-
-	/**
-	 * See corresponding method in IDao.
-	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	List<E> findAll();
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	E findById(KEY id);
 	
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	E findById(KEY id, AccessPlan options);
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	<S extends E> List<S> find(ISelect<S> finder);
 
-	/**
-	 * See corresponding method in IDao.
-	 * 
-	 * @see IDao
-	 */
-	E find(ISpecification specification);
-	
-	/**
-	 * See corresponding method in IDao.
-	 * 
-	 * @see IDao
-	 */
-	List<E> findAll(ISpecification specification);
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	E persist(E entity);
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	List<E> persistAll(List<E> entities);
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	void runTransactional(IUnitOfWork t);
 
 	/**
 	 * See corresponding method in IDao.
 	 * 
-	 * @see IDao
+	 * @see IPersistenceProvider
 	 */
 	long countAll();
 
-	/**
-	 * See corresponding method in IDao.
-	 * 
-	 * @see IDao
-	 */
-	long count(ISpecification specification);
-	
 
 	E find(TypedQuery query);
 	
@@ -133,7 +103,7 @@ public interface ITypedDao<KEY extends Serializable, E extends Entity<KEY>> {
 
     List<E> findAll(TypedQuery query);
 
-    <KEY extends Serializable, E extends Entity<KEY>> ITypedDao forEntity(Class<KEY> keyType, Class<E> entityType);
+    <KEY extends Serializable, E extends Persistent<KEY>> ITypedDao forEntity(Class<KEY> keyType, Class<E> entityType);
 
     boolean isSameVersion(E one, E other);
 

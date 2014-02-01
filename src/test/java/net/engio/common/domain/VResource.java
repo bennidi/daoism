@@ -1,14 +1,14 @@
 package net.engio.common.domain;
 
 
-import net.engio.daoism.Entity;
+import net.engio.daoism.Persistent;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.UUID;
 
 @MappedSuperclass
-public abstract class VResource implements Entity<String> {
+public abstract class VResource implements Persistent<String> {
 
     @Version
     private long version = -1;

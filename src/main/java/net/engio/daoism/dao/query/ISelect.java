@@ -1,6 +1,6 @@
 package net.engio.daoism.dao.query;
 
-import net.engio.daoism.Entity;
+import net.engio.daoism.Persistent;
 import net.engio.daoism.dao.spex.IAttribute;
 import net.engio.daoism.dao.spex.ISpecification;
 
@@ -23,7 +23,7 @@ import java.util.Map;
  */
 
 
-public interface ISelect<T extends Entity<? extends Serializable>> extends Serializable {
+public interface ISelect<T extends Persistent<? extends Serializable>> extends Serializable {
 
 	/**
 	 * Enumeration of available sort orders for result set ordering
