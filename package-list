@@ -1,0 +1,7 @@
+net.engio.daoism
+net.engio.daoism.dao
+net.engio.daoism.dao.jpa
+net.engio.daoism.dao.query
+net.engio.daoism.test
+net.engio.daoism.test.tasks
+net.engio.daoism.utils
