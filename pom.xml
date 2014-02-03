@@ -175,9 +175,6 @@
                     <header>daoism, ${project.version}</header>
                     <footer>daoism, ${project.version}</footer>
                     <doctitle>daoism, ${project.version}</doctitle>
-                    <links>
-                        <link></link>
-                    </links>
                 </configuration>
             </plugin>
             <plugin>
