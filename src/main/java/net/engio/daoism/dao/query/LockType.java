@@ -1,11 +1,10 @@
 package net.engio.daoism.dao.query;
 
 /**
-* Created with IntelliJ IDEA.
-* User: benjamin
-* Date: 5/29/13
-* Time: 10:54 AM
-* To change this template use File | Settings | File Templates.
+ * Different lock types as potentially supported by various persistence technologies.
+ * Not all lock types need to be provided by a specific persistence technology. Semantics
+ * of the same lock type may also vary.
+ *
 */
 public enum LockType {
     Optimistic,PessimisticWrite, Default, None

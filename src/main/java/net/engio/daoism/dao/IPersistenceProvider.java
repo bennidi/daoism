@@ -1,7 +1,6 @@
 package net.engio.daoism.dao;
 
 import net.engio.daoism.Persistent;
-import net.engio.daoism.dao.query.ISelect;
 import net.engio.daoism.dao.query.Options.AccessPlan;
 import net.engio.daoism.dao.query.Query;
 import net.engio.daoism.dao.query.Query.TypedQuery;
@@ -12,7 +11,7 @@ import java.util.List;
 
 /**
  * A generic interface to plug-in a specific persistence technology. The interface provides methods for the standard
- * persistence operations (Create,Read,Update,Delete) and some query methods based on a fluent query object construction.
+ * persistence operations (Create,Read,Update,Delete) and some query methods based on a slightly fluent query object construction.
  * 
  * Generic type arguments are used in method signature to avoid binding a persistence provider instance to a concrete type of
  * {@link net.engio.daoism.Persistent}. The same persistence provider instance can be shared among multiple
@@ -20,7 +19,7 @@ import java.util.List;
  * 
  * The intention of a persistence provider implementation is to encapsulate all technology aware code in one reusable and interchangeable artifact.
  * Thus, an implementation is always technology aware and coupled to the used persistence technology.
- * Other artifacts of the persistence layer such as {@link ITypedDao}  rely on the {@link IPersistenceProvider} implementation
+ * Other artifacts of the persistence layer such as {@link TypedDao}  rely on the {@link IPersistenceProvider} implementation
  * to carry out their persistence operations. A change of underlying persistence technology is possible by simply providing a different
  * implementation of {@link IPersistenceProvider}.
  * 
@@ -31,7 +30,7 @@ import java.util.List;
 public interface IPersistenceProvider {
 
 	/**
-	 * Deletes a domain object from persistence storage. Detached domain objects are reattached before deletion.
+	 * Deletes a domain object from persistent storage.
 	 * How delete operation is cascaded to referenced objects depends on the persistence technology and on the 
 	 * configuration of the persistence model (e.g. annotations on the domain object)
 	 * 
@@ -58,7 +57,7 @@ public interface IPersistenceProvider {
 
 
 	/**
-	 * Finds all domain objects of type entityClass or one of its sub types (polymorphic)
+	 * Finds all domain objects of type domainClass and possibly its subtypes
 	 * 
 	 * @param <E> Any subtype of {@link net.engio.daoism.Persistent} welcome
 	 * @param domainClass The upper bound of the class hierarchy that will be considered in the query
@@ -82,20 +81,11 @@ public interface IPersistenceProvider {
 	 * @param <E> Any subtype of {@link net.engio.daoism.Persistent} welcome
 	 * @param domainClass The class of domain object that will looked up by id
 	 * @param id The primary key of the domain object
+     * @param options Configuraiton object to specify additional options like lock mode
 	 * @return the domain object with the given id or null if such an object does not exist
 	 */
 	<E extends Persistent<? extends Serializable>> E findById(Class<E> domainClass, Serializable id, AccessPlan options);
 	
-	/**
-	 * Find domain objects using a {@link net.engio.daoism.dao.query.ISelect} (polymorphic)
-	 * 
-	 * @param <E> Any subtype of {@link net.engio.daoism.Persistent} welcome
-	 * @param domainClass The upper bound of the class hierarchy that will be considered in the query
-	 * @param finder The finder object that specifies the query conditions and parameters
-	 * @return
-	 */
-	<E extends Persistent<? extends Serializable>> List<E> findAll(Class<E> domainClass, ISelect<E> finder);
-
 
 	/**
 	 * The method is used to persist an instance of {@link net.engio.daoism.Persistent} to the underlying storage
@@ -134,15 +124,42 @@ public interface IPersistenceProvider {
 	 */
 	<E extends Persistent<? extends Serializable>> long count(Class<E> domainClass);
 
-	
-	<E extends Persistent<? extends Serializable>> List<E> findAll(Class<E> entityClass, TypedQuery query);
+    /**
+     * Execute a typed query to retrieve any number of domain objects.
+     *
+     * @param domainClass Any valid domain class
+     * @param query  The query to execute
+     * @return
+     */
+	<E extends Persistent<? extends Serializable>> List<E> findAll(Class<E> domainClass, TypedQuery query);
 
-	<E extends Persistent<? extends Serializable>> E find(Class<E> entityClass, TypedQuery query);
 
+    /**
+     * Find a single domain object using the given query. If multiple objects match, the first one is returned
+     * (Note: If the query does not specify ordering criteria, executing the same query might give different results
+     * on each execution)
+     *
+     * @param domainClass Any valid domain class
+     * @param query  The query to execute
+     * @return
+     */
+	<E extends Persistent<? extends Serializable>> E find(Class<E> domainClass, TypedQuery query);
+
+    /**
+     * Execute a query
+     *
+     * @param resultType Any type of object that may be returned be the underlying persistence storage, e.g. Long,
+     *                   Tuple or any of the valid domain classes
+     * @param source   The query definition in a form that is understood by the persistence provider
+     * @return
+     */
 	<E> List<E> runQuery(Class<E> resultType, Query source);
 
-    <E extends Persistent<? extends Serializable>> boolean isManaged(E entity);
-
+    /**
+     * Write all pending changes to the database. A flush does not commit any data. It will just write to
+     * the underlying storage technology. In context of traditional RDBMS this may cause checks of referential
+     * integrity and possibly the throwing of exceptions.
+     */
     void flush();
 
 }

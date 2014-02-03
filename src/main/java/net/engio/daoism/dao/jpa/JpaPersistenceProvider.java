@@ -23,7 +23,7 @@ import java.util.List;
 
 
 /**
- * An implementation of {@link net.engio.daoism.dao.IPersistenceProvider} interface according to JPA 2.0 specificatio
+ * An implementation of {@link net.engio.daoism.dao.IPersistenceProvider} interface for JPA 2 persistence technology.
  * 
  * @author Benjamin Diedrichsen
  * 
@@ -235,7 +235,6 @@ public abstract class JpaPersistenceProvider implements IPersistenceProvider {
 		if(source.isFirstResultSet())query.setFirstResult(source.getFirtResult());
 	}
 
-    @Override
     public <D extends Persistent<? extends Serializable>> boolean isManaged(D domainObject) {
         return entityManager().contains(domainObject);
     }

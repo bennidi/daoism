@@ -7,7 +7,7 @@
     <version>1.0.0.RC1</version>
     <packaging>jar</packaging>
     <name>daoism</name>
-    <description>Persistence implementation for JPA using DAOs and specification pattern </description>
+    <description>Persistence implementation for JPA using DAO pattern</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,13 +19,6 @@
     </properties>
 
     <dependencies>
-
-
-        <dependency>
-            <groupId>net.engio</groupId>
-            <artifactId>xpress</artifactId>
-            <version>1.0.0.RC1</version>
-        </dependency>
 
 
         <!-- Dependencies to spring modules -->
@@ -167,6 +160,40 @@
     <build>
 
         <plugins>
+            <!--
+	These two plugins take care of building and publishing the javadoc, using
+		mvn clean javadoc:javadoc scm-publish:publish-scm
+	 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>2.9.1</version>
+                <configuration>
+                    <aggregate>true</aggregate>
+                    <show>public</show>
+                    <nohelp>true</nohelp>
+                    <header>daoism, ${project.version}</header>
+                    <footer>daoism, ${project.version}</footer>
+                    <doctitle>daoism, ${project.version}</doctitle>
+                    <links>
+                        <link></link>
+                    </links>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-scm-publish-plugin</artifactId>
+                <version>1.0-beta-2</version>
+                <configuration>
+                    <checkoutDirectory>${project.build.directory}/scmpublish</checkoutDirectory>
+                    <checkinComment>Publishing javadoc for ${project.artifactId}:${project.version}</checkinComment>
+                    <content>${project.reporting.outputDirectory}/apidocs</content>
+                    <skipDeletedFiles>true</skipDeletedFiles>
+                    <pubScmUrl>scm:git:git@github.com:bennidi/daoism.git</pubScmUrl>
+                    <scmBranch>gh-pages</scmBranch> <!-- branch with static site on github-->
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

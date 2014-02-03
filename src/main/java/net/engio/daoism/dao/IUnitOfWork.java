@@ -8,7 +8,6 @@ package net.engio.daoism.dao;
  * 
  * @author Benjamin Diedrichsen
  *
- * @param <T>
  */
 public interface IUnitOfWork {
 

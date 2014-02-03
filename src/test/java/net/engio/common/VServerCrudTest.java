@@ -47,7 +47,7 @@ public class VServerCrudTest extends SpringAwareCrudTest<String, VServer> {
         entities.add(createValidEntity());
     }
 
-    public void testPeformance(){
+    public void testPerformance(){
         float count = 10000;
         float firstRun,secondRun, thirdRun;
 
@@ -107,7 +107,6 @@ public class VServerCrudTest extends SpringAwareCrudTest<String, VServer> {
 
 
         dao.persist(vServer1);
-        dao.isManaged(vServer1);
 
         List<VServer> vServers = new LinkedList<VServer>();
         vServers.add(vServer1);
@@ -137,9 +136,9 @@ public class VServerCrudTest extends SpringAwareCrudTest<String, VServer> {
         }
 
 
-        dao.findAll(Queries.VServer.ByUuid(vServer1.getUuid()));
-        dao.findAll(Query.Named(Queries.VServer.ByUuid).set("UUID").to(vServer1.getUuid()));
-        dao.countAll();
+        List<VServer> byUUid = dao.findAll(Queries.VServer.ByUuid(vServer1.getUuid()));
+        byUUid = dao.findAll(Query.Named(Queries.VServer.ByUuid).set("UUID").to(vServer1.getUuid()));
+        long howManyVServers = dao.countAll();
 
 
         modifyEntity(vServer1);

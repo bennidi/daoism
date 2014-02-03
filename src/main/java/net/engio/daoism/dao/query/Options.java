@@ -1,6 +1,8 @@
 package net.engio.daoism.dao.query;
 
-
+/**
+ * Configures additional options that may influence query execution, e.g. a write lock etc.
+ */
 public class Options {
 	
 	/**

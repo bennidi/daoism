@@ -1,7 +1,6 @@
 package net.engio.daoism.dao;
 
 import net.engio.daoism.Persistent;
-import net.engio.daoism.dao.query.ISelect;
 import net.engio.daoism.dao.query.Options.AccessPlan;
 import net.engio.daoism.dao.query.Query;
 import net.engio.daoism.dao.query.Query.TypedQuery;
@@ -60,13 +59,6 @@ public interface ITypedDao<KEY extends Serializable, E extends Persistent<KEY>> 
 	 */
 	E findById(KEY id, AccessPlan options);
 
-	/**
-	 * See corresponding method in IDao.
-	 * 
-	 * @see IPersistenceProvider
-	 */
-	<S extends E> List<S> find(ISelect<S> finder);
-
 
 	/**
 	 * See corresponding method in IDao.
@@ -96,18 +88,36 @@ public interface ITypedDao<KEY extends Serializable, E extends Persistent<KEY>> 
 	 */
 	long countAll();
 
-
+    /**
+     * See corresponding method in IDao.
+     *
+     * @see IPersistenceProvider
+     */
 	E find(TypedQuery query);
-	
+
+    /**
+     * See corresponding method in IDao.
+     *
+     * @see IPersistenceProvider
+     */
 	<R> List<R> query(Class<R> queryResultType, Query queryToRun);
 
+    /**
+     * See corresponding method in IDao.
+     *
+     * @see IPersistenceProvider
+     */
     List<E> findAll(TypedQuery query);
+
 
     <KEY extends Serializable, E extends Persistent<KEY>> ITypedDao forEntity(Class<KEY> keyType, Class<E> entityType);
 
     boolean isSameVersion(E one, E other);
 
-    boolean isManaged(E entity);
-
+    /**
+     * See corresponding method in IDao.
+     *
+     * @see IPersistenceProvider
+     */
     void flush();
 }

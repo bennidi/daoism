@@ -2,7 +2,6 @@ package net.engio.daoism.test;
 
 import net.engio.daoism.Persistent;
 import net.engio.daoism.dao.ITypedDao;
-import net.engio.daoism.dao.jpa.UnitOfWork;
 import org.junit.Test;
 
 import java.io.Serializable;
@@ -12,7 +11,7 @@ import java.util.Random;
 
 /**
  * This test implements generic test methods for the basic CRUD operations. After successfully running a test method the state of the
- * database will not have changed. This assumption can only be guaranteed to hold true, if the test methods succeeds
+ * database will not have changed, every modification will have been reverted.
  * 
  * 
  * @author Benjamin Diedrichsen
@@ -33,19 +32,24 @@ public abstract class CrudTest<KEY extends Serializable, EN extends Persistent<K
 	 */
 	protected abstract EN createValidEntity();
 
+    /**
+     * This method is used to emulate modifications on persistent entities. It should be implemented with a randomized
+     * behavior such that each call results in a (slightly) different modification
+     * @param which
+     */
     protected abstract void modifyEntity(EN which);
 
 
 	/**
-	 * Factory method to obtain a reference to the repository that manages the tests aggregates
+	 * Factory method to obtain a reference to the DAO that manages the tests entities
 	 * 
-	 * @return an instance to the repository that manages the {@link net.engio.daoism.Persistent} of the tests
+	 * @return an instance of the DAO that manages the {@link net.engio.daoism.Persistent} of the tests
 	 */
 	protected abstract ITypedDao<KEY, EN> getDao();
 	
 	/**
-	 * Subclasses need to override this method to do common db initialization tasks. An empty override is possible if no common
-	 * initialization tasks are required. Every call to this method should result in the same output!
+	 * Create and add any number of new entities and add them to the given collection. The collection is used
+     * to test persistence and removal of multiple entities as well as counting.
 	 */
 	protected abstract void addEntities(List<EN> entities);
 	
@@ -219,7 +223,7 @@ public abstract class CrudTest<KEY extends Serializable, EN extends Persistent<K
         assertFalse(getDao().isSameVersion(entityTwo, getDao().persist(entityTwo)));
     }
 
-
+    /*
     @Test
     public void testIsManaged() {
 
@@ -238,7 +242,7 @@ public abstract class CrudTest<KEY extends Serializable, EN extends Persistent<K
             }
         };
         getDao().runTransactional(createAndCheck);
-    }
+    } */
 
     private <E> List<E> getRandomSublist(List<E> from){
         if(from.size() < 5) return from;

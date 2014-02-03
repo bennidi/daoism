@@ -1,7 +1,6 @@
 package net.engio.daoism.dao;
 
 import net.engio.daoism.Persistent;
-import net.engio.daoism.dao.query.ISelect;
 import net.engio.daoism.dao.query.Options.AccessPlan;
 import net.engio.daoism.dao.query.Query;
 import net.engio.daoism.dao.query.Query.TypedQuery;
@@ -65,14 +64,7 @@ public abstract class TypedDao<K extends Serializable , E extends Persistent<K>>
 		return getPersistenceProvider().findById(entityClass, id);
 	}
 	
-	@Override
-	public <S extends E> List<S> find(ISelect<S> finder) {
-		return getPersistenceProvider().findAll(finder.getQueryRoot(), finder);
-	}
 
-
-
-	
 	@Override
 	public E persist(E entity) {
 		return getPersistenceProvider().persist(entityClass, entity);
@@ -133,10 +125,6 @@ public abstract class TypedDao<K extends Serializable , E extends Persistent<K>>
         return one.getId().equals(other.getId()) && one.getVersion() == other.getVersion();
     }
 
-    @Override
-    public boolean isManaged(E entity) {
-        return getPersistenceProvider().isManaged(entity);
-    }
 
     @Override
     public void flush() {
