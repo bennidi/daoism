@@ -24,88 +24,76 @@ import java.util.List;
 public interface ITypedDao<KEY extends Serializable, E extends Persistent<KEY>> {
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	boolean delete(E entity);
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
 	 * @return
-	 * @see IPersistenceProvider
 	 */
 	boolean deleteAll(Collection<E> entities);
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	List<E> findAll();
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	E findById(KEY id);
 	
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	E findById(KEY id, AccessPlan options);
 
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	E persist(E entity);
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	List<E> persistAll(List<E> entities);
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	void runTransactional(IUnitOfWork t);
 
 	/**
-	 * See corresponding method in IDao.
+	 * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
 	 * 
-	 * @see IPersistenceProvider
 	 */
 	long countAll();
 
     /**
-     * See corresponding method in IDao.
+     * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
      *
-     * @see IPersistenceProvider
      */
 	E find(TypedQuery query);
 
     /**
-     * See corresponding method in IDao.
+     * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
      *
-     * @see IPersistenceProvider
      */
 	<R> List<R> query(Class<R> queryResultType, Query queryToRun);
 
     /**
-     * See corresponding method in IDao.
+     * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
      *
-     * @see IPersistenceProvider
      */
     List<E> findAll(TypedQuery query);
 
@@ -115,9 +103,8 @@ public interface ITypedDao<KEY extends Serializable, E extends Persistent<KEY>> 
     boolean isSameVersion(E one, E other);
 
     /**
-     * See corresponding method in IDao.
+     * See corresponding method in {@link net.engio.daoism.dao.IPersistenceProvider}.
      *
-     * @see IPersistenceProvider
      */
     void flush();
 }

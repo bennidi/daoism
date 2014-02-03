@@ -13,7 +13,7 @@ been tested quite thoroughly. Everybody who wants to start building a system bas
 code directly or might get inspirations from it. Read this [article](http://codeblock.engio.net/?p=180) for
 more details on this particular DAO pattern implementation.
 
-You can also take a look at the [javadoc](http://bennidi.github.io/daosim)
+You can also take a look at the [javadoc](http://bennidi.github.io/daoism)
 
 The test code shows some basic use cases of the API and comes with integration of hibernate and eclipse link
 on top of an H2 database. Spring is used to wire up the objects but any managed or unmanaged environment
